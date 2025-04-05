@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tab Cleaner</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body { font-family: sans-serif; width: 300px; margin: 0; padding: 10px; }
+      .tab-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; padding: 3px; border: 1px solid transparent; } /* Added padding/border for better drop targeting */
+      .tab-title { flex-grow: 1; margin-right: 10px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+      button { background-color: red; color: white; border: none; padding: 2px 6px; cursor: pointer; }
+      .window-header { margin-top: 10px; margin-bottom: 5px; font-weight: bold; border-bottom: 1px solid #ccc; padding-bottom: 3px; }
+      .active-tab { background-color: #e0e0e0; font-weight: bold; }
+      .tab-item:hover { background-color: #f0f0f0; cursor: pointer; } /* Add hover effect */
+      .tab-item.dragging { opacity: 0.5; border: 1px dashed #000; } /* Style for the item being dragged */
+      .drop-target { border-bottom: 2px solid blue; } /* Indicator for where the item will be dropped */
+      .window-drop-target { background-color: #e0f0ff; } /* Highlight window header when dragging over */
+    </style>
+  </head>
+  <body>
+    <h3>Open Tabs</h3>
+    <div id="tabs"></div>
+    <script src="popup.js"></script>
+  </body>
+</html>
+
+
