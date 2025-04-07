@@ -63,9 +63,24 @@ document.addEventListener('DOMContentLoaded', () => {
             closeBtn.textContent = 'X';
             closeBtn.addEventListener('click', (event) => {
               event.stopPropagation();
+              const tabItem = event.target.closest('.tab-item');
+              const windowId = tabItem.dataset.windowId;
+              const container = tabItem.parentNode; // Assuming tabContainer
+
               chrome.tabs.remove(tab.id, () => {
-                 // Simple refresh after close might be easiest
-                 renderTabs();
+                // Check if the tabItem is still in the DOM before removing
+                if (tabItem && tabItem.parentNode === container) {
+                    container.removeChild(tabItem);
+                }
+
+                // Check if the window section is now empty
+                const remainingTabsInWindow = container.querySelectorAll(`.tab-item[data-window-id='${windowId}']`);
+                if (remainingTabsInWindow.length === 0) {
+                  const windowHeader = container.querySelector(`h4[data-window-id='${windowId}']`);
+                  if (windowHeader) {
+                    container.removeChild(windowHeader);
+                  }
+                }
               });
             });
             div.appendChild(closeBtn);
